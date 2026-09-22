@@ -7,7 +7,7 @@ pas encore exposées : les rendre accessibles est l'objet des exercices.
 
 ## Installation
 
-Node 18 ou plus récent est nécessaire.
+Node 20 ou plus récent est nécessaire.
 
 ```bash
 npm install
