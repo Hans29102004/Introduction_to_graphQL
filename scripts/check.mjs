@@ -9,6 +9,7 @@ import { ApolloServer } from '@apollo/server';
 import { typeDefs } from '../src/typeDefs.js';
 import { resolvers } from '../src/resolvers.js';
 import { db, findById } from '../src/db.js';
+import { explainSchemaError } from '../src/schemaErrors.js';
 
 const NOT_STARTED = Symbol('non commencé');
 
@@ -17,8 +18,8 @@ try {
   server = new ApolloServer({ typeDefs, resolvers, includeStacktraceInErrorResponses: false });
   await server.start();
 } catch (error) {
-  console.error('Le schéma ne se construit pas. Corrigez cette erreur avant de continuer :\n');
-  console.error(error.message);
+  console.error('Le schéma ne se construit pas. Corrigez cette erreur avant de continuer.\n');
+  console.error(explainSchemaError(error));
   process.exit(1);
 }
 

@@ -63,6 +63,7 @@ fonctionne sans serveur démarré.
 | `src/typeDefs.js` | le schéma : types, champs, queries et mutations |
 | `src/resolvers.js` | les fonctions qui remplissent chaque champ |
 | `src/db.js` | le jeu de données en mémoire et deux fonctions utilitaires |
+| `src/schemaErrors.js` | reformule les erreurs de construction du schéma |
 | `scripts/check.mjs` | auto-évaluation de la partie 2 |
 | `EXERCICES.md` | les énoncés |
 | `SOLUTIONS.md` | le corrigé |

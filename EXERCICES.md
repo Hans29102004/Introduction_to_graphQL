@@ -167,8 +167,18 @@ Méthode, identique pour chaque exercice :
 3. redémarrer le serveur, tester la requête dans Sandbox
 
 Un champ déclaré dans le schéma mais sans resolver ne provoque pas d'erreur : il
-renvoie `null`, ou fait échouer la requête s'il est non nullable. Pensez donc
-toujours aux deux fichiers.
+renvoie `null`, ou fait échouer la requête s'il est non nullable.
+
+L'inverse empêche carrément le serveur de démarrer. Un resolver écrit pour un
+champ que le schéma ne déclare pas arrête `npm start` comme `npm run check`
+sur ce message :
+
+```
+Query.brand existe dans src/resolvers.js mais pas dans src/typeDefs.js.
+```
+
+C'est l'erreur la plus courante du TP, et elle se corrige en ajoutant la moitié
+manquante. D'où l'ordre conseillé : le schéma d'abord, le resolver ensuite.
 
 Pour savoir où vous en êtes :
 

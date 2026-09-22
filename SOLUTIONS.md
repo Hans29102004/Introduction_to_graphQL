@@ -512,8 +512,11 @@ ultérieure du catalogue ne doit pas changer le total des commandes passées.
 
 - champ ajouté dans `typeDefs` mais pas dans `resolvers` : le champ vaut `null`,
   ou la requête échoue s'il est non nullable
-- l'inverse, un resolver écrit sans déclaration dans le schéma : le champ reste
-  introuvable, le resolver n'est jamais appelé
+- l'inverse, un resolver écrit sans déclaration dans le schéma : le serveur
+  refuse de démarrer, sur `Query.brand defined in resolvers, but not in schema`.
+  Le projet reformule ce message pour nommer les deux fichiers concernés. Cela
+  arrive typiquement en collant d'un coup les resolvers de deux exercices, alors
+  que le schéma n'a reçu que le premier
 - comparaison d'identifiants avec `===` entre un nombre et une chaîne : les `ID`
   arrivent toujours en chaîne de caractères, d'où `findById` qui compare via
   `String()`
