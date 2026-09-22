@@ -1,0 +1,25 @@
+{
+  "name": "graphql-intro-course",
+  "version": "1.0.0",
+  "description": "TP d'introduction a GraphQL avec Apollo Server : une API e-commerce a interroger puis a etendre.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "check": "node scripts/check.mjs"
+  },
+  "keywords": [
+    "graphql",
+    "apollo",
+    "cours"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/server": "^5.5.1",
+    "graphql": "^16.14.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
