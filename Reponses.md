@@ -72,7 +72,6 @@
 
 
 ## Partie 2 : écrire des typeDefs et des resolvers
-### Exercice 1 : un nouveau type et une query 
-    Voir code 
-### Exercice 2 : une query avec un argument
-    
+### Exercice 1 ,2,3,4,5,6
+    Respose_Screnn\Exo_Part 2.png
+

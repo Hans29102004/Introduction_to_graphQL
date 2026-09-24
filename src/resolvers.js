@@ -18,7 +18,7 @@ import { db, findById, nextId } from './db.js';
 
 export const resolvers = {
   Query: {
-    products: () => db.products,
+    
     product: (_parent, args) => findById(db.products, args.id),
     users: () => db.users,
     user: (_parent, args) => findById(db.users, args.id),
@@ -26,14 +26,29 @@ export const resolvers = {
     order: (_parent, args) => findById(db.orders, args.id),
     
     // TODO Exercice 1 : brands
-    brands: () => db.brands
+    brands: () => db.brands,
     // TODO Exercice 2 : brand
+    brand: (_parent, args) => findById(db.brands, args.id),
     // TODO Exercice 6 : filtrer products selon args.brandId et args.maxPrice
+    products: (_parent, { brandId, maxPrice }) => {
+    let products = db.products;
+
+    if (brandId !== undefined) {
+      products = products.filter((product) => product.brandId === brandId);
+    }
+
+    if (maxPrice !== undefined) {
+      products = products.filter((product) => product.price <= maxPrice);
+    }
+
+    return products;
+},
     // TODO Exercice 7 : warehouses
   },
 
   Product: {
     // TODO Exercice 3 : brand, à retrouver depuis product.brandId
+      brand: (product) => findById(db.brands, product.brandId),
     // TODO Exercice 7 : stockByWarehouse, à construire depuis db.stocks
   },
 
@@ -42,6 +57,8 @@ export const resolvers = {
     orders: (user) => db.orders.filter((order) => order.userId === user.id),
 
     // TODO Exercice 5 : ordersCount
+    ordersCount: (user) =>
+    db.orders.filter((order) => order.userId === user.id).length,
   },
 
   Order: {
@@ -50,11 +67,21 @@ export const resolvers = {
     customer: (order) => findById(db.users, order.userId),
 
     // TODO Exercice 5 : total
+    total: (order) =>
+    order.lines.reduce(
+      (total, line) => total + line.quantity * line.unitPrice,
+      0
+    ),  
   },
 
   OrderLine: {
     product: (line) => findById(db.products, line.productId),
   },
+
+  Brand: {
+  products: (brand) =>
+    db.products.filter((product) => product.brandId === brand.id),
+},
 
   Mutation: {
     createUser: (_parent, { input }) => {
@@ -97,6 +124,15 @@ export const resolvers = {
     },
 
     // TODO Exercice 6 : createBrand
+    createBrand: (_parent, { input }) => {
+  const brand = {
+    id: nextId(db.brands),
+    ...input,
+  };
+
+  db.brands.push(brand);
+  return brand;
+},
     // TODO Exercice 7 : restockProduct
     // TODO Exercice 8 : createOrder
   },

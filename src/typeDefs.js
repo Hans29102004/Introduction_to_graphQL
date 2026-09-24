@@ -18,6 +18,7 @@ export const typeDefs = `#graphql
     brandId: ID
 
     # TODO Exercice 3 : ajouter le champ brand qui renvoie la marque de l'article
+    brand: Brand
     # TODO Exercice 7 : ajouter le champ stockByWarehouse
   }
 
@@ -31,6 +32,7 @@ export const typeDefs = `#graphql
     orders: [Order!]!
 
     # TODO Exercice 5 : ajouter le champ ordersCount
+    ordersCount: Int!
   }
 
   """Une commande passée par un client."""
@@ -45,6 +47,7 @@ export const typeDefs = `#graphql
     lines: [OrderLine!]!
 
     # TODO Exercice 5 : ajouter le champ total
+    total: Float!
   }
 
   """Une ligne de commande : un article, une quantité, un prix."""
@@ -69,14 +72,16 @@ export const typeDefs = `#graphql
   id: ID!
   name: String!
   country: String!
+  products: [Product!]!
 }
   # TODO Exercice 4 : y ajouter le champ products
+
   # TODO Exercice 7 : déclarer les types Warehouse (id, name, city) et StockEntry
 
   """Les points d'entrée en lecture."""
   type Query {
     "Tous les articles du catalogue."
-    products: [Product!]!
+    products(brandId: ID, maxPrice: Float): [Product!]!
     "Un article par son identifiant, ou null s'il n'existe pas."
     product(id: ID!): Product
     "Tous les clients."
@@ -91,6 +96,7 @@ export const typeDefs = `#graphql
     # TODO Exercice 1 : ajouter brands
     brands: [Brand!]!
     # TODO Exercice 2 : ajouter brand(id: ID!)
+    brand(id: ID!): Brand
     # TODO Exercice 6 : ajouter les arguments brandId et maxPrice sur products
     # TODO Exercice 7 : ajouter warehouses
   }
@@ -105,6 +111,7 @@ export const typeDefs = `#graphql
     updateOrderStatus(orderId: ID!, status: OrderStatus!): Order!
 
     # TODO Exercice 6 : ajouter createBrand(input: CreateBrandInput!)
+    createBrand(input: CreateBrandInput!): Brand!
     # TODO Exercice 7 : ajouter restockProduct(productId: ID!, warehouseId: ID!, quantity: Int!)
     # TODO Exercice 8 : ajouter createOrder(input: CreateOrderInput!)
   }
@@ -126,5 +133,9 @@ export const typeDefs = `#graphql
   }
 
   # TODO Exercice 6 : déclarer l'input CreateBrandInput
+  input CreateBrandInput {
+  name: String!
+  country: String!
+}
   # TODO Exercice 8 : déclarer les inputs CreateOrderInput et OrderLineInput
 `;
