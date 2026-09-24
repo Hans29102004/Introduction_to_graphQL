@@ -65,6 +65,11 @@ export const typeDefs = `#graphql
   }
 
   # TODO Exercice 1 : déclarer le type Brand (id, name, country)
+  type Brand {
+  id: ID!
+  name: String!
+  country: String!
+}
   # TODO Exercice 4 : y ajouter le champ products
   # TODO Exercice 7 : déclarer les types Warehouse (id, name, city) et StockEntry
 
@@ -84,6 +89,7 @@ export const typeDefs = `#graphql
     order(id: ID!): Order
 
     # TODO Exercice 1 : ajouter brands
+    brands: [Brand!]!
     # TODO Exercice 2 : ajouter brand(id: ID!)
     # TODO Exercice 6 : ajouter les arguments brandId et maxPrice sur products
     # TODO Exercice 7 : ajouter warehouses
